@@ -2,13 +2,15 @@
 
 I have modernized your project to use **Capacitor** for a pure Web-to-APK conversion. This removes all dependencies on Expo and allows you to build a professional, high-performance Android app from your local code.
 
-## 🚀 The Easiest Way: GitHub Actions
-The project is now configured to build your APK automatically every time you push to GitHub.
+## 🚀 Professional Automated Build (GitHub)
+The project is now configured to build a **Properly Signed Release APK** automatically.
 
-1.  **Commit and Push** your changes to your repository.
-2.  Go to the **"Actions"** tab on your GitHub repository page.
-3.  Click on the **"Build Android APK"** workflow.
-4.  Once finished, the `.apk` file will be available as a **Downloadable Artifact**.
+1.  **Commit and Force Push** to reset your history (if desired).
+2.  Go to the **"Actions"** tab on GitHub.
+3.  Wait for the **"PhysioInvoice Professional Build"** to finish.
+4.  Download **TWO** items from the artifacts:
+    -   **PhysioInvoice-Signed-Release**: Your final app for installation/Play Store.
+    -   **PhysioInvoice-Release-Keystore**: **CRITICAL!** Download this and keep it safe. You will need it for any future updates to your app.
 
 ---
 

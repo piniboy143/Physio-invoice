@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Invoice Studio</string>
+    <string name="title_activity_main">Invoice Studio</string>
+    <string name="package_name">com.invoicestudio.app</string>
+    <string name="custom_url_scheme">com.invoicestudio.app</string>
+</resources>

@@ -1,4 +1,4 @@
-name: PhysioInvoice Auto-Build
+name: PhysioInvoice Professional Build
 on:
   push:
     branches: [ master ]
@@ -31,23 +31,36 @@ jobs:
         run: npm run build
           
       - name: Setup Capacitor Android
-        run: |
-          npx cap add android || true
-          npx cap sync
+        run: npx cap sync
           
-      - name: Build with Gradle
+      - name: Generate Release Keystore
+        run: |
+          keytool -genkey -v -keystore release.keystore -alias physio -keyalg RSA -keysize 2048 -validity 10000 -storepass physio2026 -keypass physio2026 -dname "CN=PhysioInvoice, OU=Mobile, O=InvoiceStudio, L=Delhi, S=Delhi, C=IN"
+
+      - name: Build and Sign Release APK
         run: |
           cd android
           chmod +x gradlew
-          ./gradlew assembleDebug
+          # Pass signing properties to Gradle
+          ./gradlew assembleRelease \
+            -Pandroid.injected.signing.store.file=$(pwd)/../release.keystore \
+            -Pandroid.injected.signing.store.password=physio2026 \
+            -Pandroid.injected.signing.key.alias=physio \
+            -Pandroid.injected.signing.key.password=physio2026
 
       - name: List Output Files (Debug)
         if: always()
         run: |
           find android/app/build/outputs/apk -name "*.apk" || echo "No APKs found"
 
-      - name: Upload APK
+      - name: Upload Signed APK
         uses: actions/upload-artifact@v4
         with:
-          name: PhysioInvoice-Debug-APK
-          path: android/app/build/outputs/apk/debug/*.apk
+          name: PhysioInvoice-Signed-Release
+          path: android/app/build/outputs/apk/release/*.apk
+
+      - name: Upload Keystore (SAVE THIS!)
+        uses: actions/upload-artifact@v4
+        with:
+          name: PhysioInvoice-Release-Keystore
+          path: release.keystore
