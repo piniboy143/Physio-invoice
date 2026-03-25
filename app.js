@@ -55,7 +55,9 @@ const SyncManager = {
   db: null,
   uid: localStorage.getItem("sync_uid") || null,
   enabled: localStorage.getItem("sync_enabled") === 'true',
-  isNative: !!window.ReactNativeWebView,
+    get isNative() {
+    return !!window.ReactNativeWebView || !!window.Capacitor || window.location.protocol === 'capacitor:';
+  },
 
   init() {
     if (typeof firebase === 'undefined') return console.warn("Firebase not loaded");

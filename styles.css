@@ -1336,13 +1336,13 @@ header.blue-header h1 {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  margin-top: -10px;
+  margin-top: 0;
 }
 
 #pdfFrame {
   flex: 1;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   overflow-y: auto;
   overflow-x: hidden;
@@ -1722,7 +1722,7 @@ header.blue-header h1 {
 .temp-header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     margin-bottom: calc(40px * var(--inv-scale));
 }
 
@@ -2262,7 +2262,7 @@ input:checked + .slider:before { transform: translateX(20px); }
   border-radius: 16px;
   padding: 16px;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 12px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
   margin-bottom: 12px;
