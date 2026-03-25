@@ -1,0 +1,5 @@
+{
+  "appId": "com.invoicestudio.app",
+  "appName": "Invoice Studio",
+  "webDir": "dist"
+}

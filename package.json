@@ -1,0 +1,20 @@
+{
+  "name": "billing",
+  "version": "1.0.0",
+  "main": "ExpoApp.js",
+  "scripts": {
+    "build": "node bundle.js",
+    "cap-sync": "npx cap sync",
+    "android-open": "npx cap open android"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@capacitor/core": "^6.0.0",
+    "@capacitor/android": "^6.0.0",
+    "@capacitor/cli": "^6.0.0",
+    "firebase": "^10.0.0"
+  }
+}

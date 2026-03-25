@@ -1,0 +1,17 @@
+{
+  "name": "Invoice Studio",
+  "short_name": "Invoices",
+  "description": "Professional Medical Billing & Prescription Manager",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "icons": [
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

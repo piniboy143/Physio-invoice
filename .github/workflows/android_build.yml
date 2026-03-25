@@ -1,0 +1,53 @@
+name: PhysioInvoice Auto-Build
+on:
+  push:
+    branches: [ master ]
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Build Standalone Web Assets
+        run: npm run build
+          
+      - name: Setup Capacitor Android
+        run: |
+          npx cap add android || true
+          npx cap sync
+          
+      - name: Build with Gradle
+        run: |
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleDebug
+
+      - name: List Output Files (Debug)
+        if: always()
+        run: |
+          find android/app/build/outputs/apk -name "*.apk" || echo "No APKs found"
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: PhysioInvoice-Debug-APK
+          path: android/app/build/outputs/apk/debug/*.apk

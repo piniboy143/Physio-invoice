@@ -1,0 +1,31 @@
+{
+  "expo": {
+    "name": "Invoice Studio",
+    "slug": "billing",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./icons/icon-512.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./icons/icon-512.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "android": {
+      "package": "com.invoicestudio.app",
+      "usesCleartextTraffic": true,
+      "adaptiveIcon": {
+        "foregroundImage": "./icons/icon-512.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "favicon": "./icons/icon-512.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "d10340c4-351d-493a-929d-dd13a1570038"
+      }
+    }
+  }
+}
