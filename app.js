@@ -297,7 +297,7 @@ document.addEventListener('input', (e) => {
 const setupBtn = (id, fn) => {
   const el = document.getElementById(id);
   if (el) {
-    el.onclick = fn;
+    if (el) el.onclick = fn;
   }
 };
 let screenStack = ["dashboard"];
@@ -322,7 +322,7 @@ function showBottomSheet(header, items) {
   content.innerHTML = html;
   overlay.classList.add("active");
   sheet.classList.add("active");
-  overlay.onclick = hideBottomSheet;
+  if (overlay) overlay.onclick = hideBottomSheet;
   document.body.style.overflow = "hidden";
 }
 
@@ -341,7 +341,7 @@ window.showInputModal = (title, placeholder, currentVal, callback) => {
   
   overlay.classList.add("active");
   
-  saveBtn.onclick = () => {
+  if (saveBtn) saveBtn.onclick = () => {
     const val = inputEl.value.trim();
     if (val) {
       callback(val);
@@ -372,7 +372,7 @@ window.showConfirmModal = (title, message, onConfirm, onCancel) => {
   
   overlay.classList.add("active");
 
-  confirmBtn.onclick = () => {
+  if (confirmBtn) confirmBtn.onclick = () => {
     overlay.classList.remove("active");
     if (onConfirm) onConfirm();
   };
@@ -2614,7 +2614,7 @@ window.closeModal = () => {
   els.overlay.classList.remove("active");
 };
 
-if (els.overlay) els.overlay.onclick = (e) => { if (e.target === els.overlay) closeModal(); };
+if (els.overlay) els.if (overlay) overlay.onclick = (e) => { if (e.target === els.overlay) closeModal(); };
 
 // Item Picker Logic
 window.renderItemPicker = () => {
@@ -3542,7 +3542,7 @@ window.renderPrescDoctorForm = () => {
         preview.innerHTML = `<span style="color: #64748b; font-size: 0.9rem;">Tap to select signature</span>`;
     }
 
-    preview.onclick = () => pushScreen('signaturePicker');
+    if (preview) preview.onclick = () => pushScreen('signaturePicker');
 };
 
 window.saveDoctor = () => {
@@ -3907,15 +3907,15 @@ window.generatePrescriptionHTML = (p) => {
     <div style="position: relative; width: 210mm; min-height: 297mm; padding: 10mm 20mm 20mm 20mm; margin: 0 auto; background: white; color: #1e3a8a; font-family: 'Outfit', sans-serif; overflow: hidden;">
         <!-- Watermark -->
         <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-30deg); opacity: 0.03; font-size: 15rem; font-weight: 800; pointer-events: none; z-index: 0; white-space: nowrap;">
-            CLINIC NAME
+            ${(biz.name || 'PHYSIONER').toUpperCase()}
         </div>
 
         <!-- Header -->
         <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid #1e3a8a; padding-bottom: 10px; margin-bottom: 20px; position: relative; z-index: 1;">
             <div style="flex: 1;">
-                <h1 style="margin: 0; font-size: 2.2rem; font-weight: 900; letter-spacing: -1px; line-height: 1;">CLINIC</h1>
-                <div style="font-size: 0.9rem; font-weight: 700; text-transform: uppercase; margin-top: 2px;">Physiotherapy Clinic</div>
-                <div style="font-family: 'Dancing Script', cursive; font-size: 1.2rem; color: #3b82f6; margin-top: 5px;">Restore. Realign. Revive.</div>
+                <h1 style="margin: 0; font-size: 2.2rem; font-weight: 900; letter-spacing: -1px; line-height: 1;">${biz.name || "CLINIC"}</h1>
+                <div style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; margin-top: 2px; color: #64748b;">Specialized Physiotherapy Care</div>
+                <div style="font-family: 'Dancing Script', cursive; font-size: 1.2rem; color: #3b82f6; margin-top: 5px;">Restore. Revive. Realign.</div>
             </div>
             <div style="flex: 0 0 100px; text-align: center; display: flex; justify-content: center; align-items: center;">
                 ${hasLogo ? `<img src="${biz.logo}" style="max-height: 80px; max-width: 100%; object-fit: contain;">` : ''}
