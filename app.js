@@ -375,6 +375,7 @@ window.showConfirmModal = (title, message, onConfirm, onCancel) => {
   if (confirmBtn) confirmBtn.onclick = () => {
     overlay.classList.remove("active");
     if (onConfirm) onConfirm();
+    closeConfirmModal();
   };
 
   cancelBtn.onclick = () => {
@@ -2614,7 +2615,7 @@ window.closeModal = () => {
   els.overlay.classList.remove("active");
 };
 
-if (els.overlay) els.if (overlay) overlay.onclick = (e) => { if (e.target === els.overlay) closeModal(); };
+if (els.overlay) els.overlay.onclick = (e) => { if (e.target === els.overlay) closeModal(); };
 
 // Item Picker Logic
 window.renderItemPicker = () => {
@@ -4534,3 +4535,32 @@ window.saveToContacts = (client) => {
     link.click();
     document.body.removeChild(link);
 };
+
+// --- FINAL INITIALIZATION ---
+const startApp = () => {
+    console.log("Starting App...");
+    SyncManager.init();
+    
+    // Ensure we start on the dashboard
+    if (window.renderDashboard) {
+        renderScreen("dashboard");
+        renderDashboard();
+    }
+};
+
+window.renderAll = () => {
+    console.log("Render All called");
+    const currentScreen = screenStack[screenStack.length - 1];
+    if (currentScreen === "dashboard") renderDashboard();
+    else if (currentScreen === "estimatesDashboard") renderEstimatesDashboard();
+    else if (currentScreen === "reportDashboard") renderReportDashboard();
+    else if (currentScreen === "settings") renderSettings();
+    else if (currentScreen === "itemPicker") renderItemsList();
+    else if (currentScreen === "clientPicker") renderClientPicker();
+};
+
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", startApp);
+} else {
+    startApp();
+}
