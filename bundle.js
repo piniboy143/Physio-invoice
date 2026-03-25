@@ -12,14 +12,24 @@ const assets = {
 
 async function download(url, dest) {
     return new Promise((resolve, reject) => {
+        if (fs.existsSync(dest)) {
+            console.log(`${dest} already exists.`);
+            return resolve();
+        }
+        console.log(`Downloading ${url}...`);
         const file = fs.createWriteStream(dest);
         https.get(url, response => {
+            if (response.statusCode !== 200) {
+                reject(new Error(`Failed to download ${url}: ${response.statusCode}`));
+                return;
+            }
             response.pipe(file);
             file.on('finish', () => {
                 file.close(resolve);
             });
         }).on('error', err => {
-            fs.unlink(dest, () => reject(err));
+            if (fs.existsSync(dest)) fs.unlinkSync(dest);
+            reject(err);
         });
     });
 }
@@ -29,12 +39,7 @@ async function run() {
 
     // 1. Download missing libraries
     for (const [url, file] of Object.entries(assets)) {
-        if (!fs.existsSync(file)) {
-            console.log(`Downloading ${url}...`);
-            await download(url, file);
-        } else {
-            console.log(`${file} already exists.`);
-        }
+        await download(url, file);
     }
 
     // 2. Read Source Files
@@ -45,18 +50,31 @@ async function run() {
     // 3. Process and Inline
     let finalHtml = html;
 
-    // Replace CSS link with <style>
-    finalHtml = finalHtml.replace(/<link rel="stylesheet" href="styles.css[^"]*">/i, `<style>\n${css}\n</style>`);
-
-    // Inline JS Libraries (replace script tags with actual content)
-    for (const [url, file] of Object.entries(assets)) {
-        const jsContent = fs.readFileSync(file, 'utf8').replace(/<\/script>/g, '<\\/script>');
-        finalHtml = finalHtml.replace(new RegExp(`<script src="${url}"></script>`, 'i'), `<script>\n${jsContent}\n</script>`);
+    // Helper for safe replacement (no $ expansion)
+    function safeReplace(source, targetPattern, replacement) {
+        // Find the match using regex first to get the exact string
+        const match = source.match(targetPattern);
+        if (match) {
+            console.log(`Inlining ${match[0]}...`);
+            const parts = source.split(match[0]);
+            return parts.join(replacement);
+        }
+        return source;
     }
 
-    // Inline app.js (replace the v2.2 script tag)
+    // Replace CSS link with <style>
+    finalHtml = safeReplace(finalHtml, /<link rel="stylesheet" href="styles.css[^"]*">/i, `<style>\n${css}\n</style>`);
+
+    // Inline JS Libraries
+    for (const [url, file] of Object.entries(assets)) {
+        const jsContent = fs.readFileSync(file, 'utf8').replace(/<\/script>/g, '<\\/script>');
+        const libRegex = new RegExp(`<script src="${url.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"></script>`, 'i');
+        finalHtml = safeReplace(finalHtml, libRegex, `<script>\n${jsContent}\n</script>`);
+    }
+
+    // Inline app.js
     const safeApp = appJs.replace(/<\/script>/g, '<\\/script>');
-    finalHtml = finalHtml.replace(/<script src="app.js[^"]*"><\/script>/i, `<script>\n${safeApp}\n</script>`);
+    finalHtml = safeReplace(finalHtml, /<script src="app.js[^"]*"><\/script>/i, `<script>\n${safeApp}\n</script>`);
 
     // Remove Service Worker registration script
     finalHtml = finalHtml.replace(/<script>\s*if\s*\('serviceWorker'[\s\S]*?<\/script>/i, '');
