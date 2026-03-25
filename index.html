@@ -647,7 +647,7 @@ input:checked + .slider:before { transform: translateX(20px); }
 .sidenav {
   position: fixed;
   top: 0;
-  left: calc(50% - 240px - 280px); /* 50% - half-app-width - sidenav-width */
+  left: -280px;
   width: 280px;
   height: 100%;
   background: white;
@@ -689,7 +689,7 @@ input:checked + .slider:before { transform: translateX(20px); }
 
 .sidenav-header {
   background: var(--primary);
-  padding: 30px 20px;
+  padding: calc(40px + env(safe-area-inset-top, 0px)) 20px 30px;
   color: white;
   display: flex;
   flex-direction: column;
@@ -705,6 +705,7 @@ input:checked + .slider:before { transform: translateX(20px); }
   border-radius: 4px;
   padding: 5px;
   object-fit: contain;
+  margin-top: env(safe-area-inset-top, 10px);
 }
 
 .sidenav-name {
@@ -1646,12 +1647,14 @@ header.blue-header h1 {
 }
 
 .pdf-scaler {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  transform-origin: center center; /* Centered scaling for neatness */
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  width: 100% !important;
+  max-width: 100vw !important;
+  transform-origin: top center !important;
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin: 0 auto !important;
 }
 
 /* --- High Fidelity Template Styles --- */
@@ -3288,8 +3291,8 @@ input:checked + .slider:before { transform: translateX(20px); }
           <div style="padding: 16px;">
             <div class="form-card">
               <div class="form-group">
-                <label>Doctor Name</label>
-                <input type="text" class="form-input" id="drName" placeholder="Dr. Piyush Wadhwa (PT)">
+                <label>Doctor</label>
+                <input type="text" class="form-input" id="drName" placeholder="e.g. Dr. John Doe">
               </div>
               <div class="form-group">
                 <label>Qualifications (up to 10)</label>
@@ -3408,7 +3411,7 @@ input:checked + .slider:before { transform: translateX(20px); }
 
       <section class="screen" id="clientScreen">
         <div style="padding: 16px;">
-          <div class="new-client-card" id="createNewClientBtn">
+          <div class="new-client-card" onclick="window.addNewClient()">
             <div class="content">
               <div class="circle-plus small">+</div>
               <span class="label">New Client</span>
@@ -5515,10 +5518,6 @@ function renderClientPicker() {
     `;
   }).join("");
 
-  document.getElementById("createNewClientBtn").onclick = () => {
-    window.editingClientId = null;
-    pushScreen("clientForm");
-  };
 }
 
 window.renderClientForm = (clientId) => {
@@ -7257,8 +7256,8 @@ window.renderItemPicker = () => {
         <div style="font-weight: 700; color: #1e293b;">${item.name}</div>
         <div style="font-size: 0.85rem; color: var(--primary); font-weight: 600;">${formatINR(item.price)}</div>
       </div>
-      <div class="picker-card-edit" onclick="event.stopPropagation(); window.deleteGlobalItem(event, '${item.id}')">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+      <div class="picker-card-edit" onclick="event.stopPropagation(); window.deleteGlobalItem(event, '${item.id}')" style="padding: 10px; margin: -10px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
       </div>
     </div>
   `).join("");
@@ -8537,14 +8536,14 @@ window.generatePrescriptionHTML = (p) => {
     return `
     <div style="position: relative; width: 210mm; min-height: 297mm; padding: 10mm 20mm 20mm 20mm; margin: 0 auto; background: white; color: #1e3a8a; font-family: 'Outfit', sans-serif; overflow: hidden;">
         <!-- Watermark -->
-        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-30deg); opacity: 0.03; font-size: 15rem; font-weight: 800; pointer-events: none; z-index: 0; white-space: nowrap;">
-            CLINIC NAME
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-30deg); opacity: 0.03; font-size: 10rem; font-weight: 800; pointer-events: none; z-index: 0; white-space: nowrap; text-transform: uppercase;">
+            ${biz.name || "PRESCRIPTION"}
         </div>
 
         <!-- Header -->
         <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid #1e3a8a; padding-bottom: 10px; margin-bottom: 20px; position: relative; z-index: 1;">
             <div style="flex: 1;">
-                <h1 style="margin: 0; font-size: 2.2rem; font-weight: 900; letter-spacing: -1px; line-height: 1;">CLINIC</h1>
+                <h1 style="margin: 0; font-size: 2.2rem; font-weight: 900; letter-spacing: -1px; line-height: 1; text-transform: uppercase;">${biz.name || "CLINIC"}</h1>
                 <div style="font-size: 0.9rem; font-weight: 700; text-transform: uppercase; margin-top: 2px;">Physiotherapy Clinic</div>
                 <div style="font-family: 'Dancing Script', cursive; font-size: 1.2rem; color: #3b82f6; margin-top: 5px;">Restore. Realign. Revive.</div>
             </div>
@@ -9109,44 +9108,12 @@ window.importSalesData = () => {
  */
 
 window.shareDocumentNative = () => {
-    const element = document.getElementById('fullPdfFrame');
-    if (!element) return;
-    
-    // Get identifying info
-    const isPrescription = !!element.querySelector('.presc-container');
-    const nameStr = element.querySelector('#previewClientName')?.innerText || 'Document';
-    const filename = isPrescription ? `Prescription_${nameStr}.pdf` : `Invoice_${nameStr}.pdf`;
-
-    // Special case for full preview sharing
-    if (window.ReactNativeWebView) {
-        window.ReactNativeWebView.postMessage(JSON.stringify({
-            type: 'share',
-            html: element.innerHTML,
-            filename: filename
-        }));
-    } else {
-        // Fallback for web: just use the existing export/print
-        window.exportFullPreviewToPDF();
-    }
+    // For Capacitor Android, window.print() is the most reliable way to trigger the native print/save-as-pdf-on-drive flow.
+    window.print();
 };
 
 window.shareCurrentPrescription = () => {
-    const element = document.getElementById("prescPreviewContainer");
-    if (!element) return;
-    
-    const ptId = currentPrescription?.patientId;
-    const ptName = state.patients.find(p => p.id === ptId)?.name || "Patient";
-    const filename = `Prescription_${ptName}.pdf`;
-
-    if (window.ReactNativeWebView) {
-        window.ReactNativeWebView.postMessage(JSON.stringify({
-            type: 'share',
-            html: element.innerHTML,
-            filename: filename
-        }));
-    } else {
-        window.printCurrentPrescription();
-    }
+    window.print();
 };
 
 // Redundant exportToExcel removed (Better version exists at line 2849)

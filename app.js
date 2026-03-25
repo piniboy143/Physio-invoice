@@ -11,12 +11,10 @@ window.onerror = function(msg, url, line, col, error) {
 const STORAGE_KEY = "billing_v2_state";
 
 const defaultState = {
-  businesses: [{ id: "b1", name: "Your Clinic Name", address: "", email: "", phone: "" }],
+  businesses: [{ id: "b1", name: "", address: "", email: "", phone: "" }],
   activeBusinessId: "b1",
   patients: [],
-  items: [
-    { id: "i1", name: "General Consultation", price: 0, unit: "Session" }
-  ],
+  items: [],
   invoices: [],
   activeFilter: "all",
   signatures: [],
@@ -2083,28 +2081,51 @@ window.renderPaymentHistory = () => {
     container.appendChild(card);
   });
 
-  // Always re-bind the Add button inside render to be safe
+  // Refactored to use the modern payment screen
   setupBtn("btnAddPayment", () => {
     if (!currentInvoice) return;
-    window.showInputModal("Payment Amount", "e.g. 500", "", (amtVal) => {
-      const amt = parseFloat(amtVal);
-      if (isNaN(amt) || amt <= 0) return alert("Invalid amount");
-      
-      window.showInputModal("Payment Date", "", new Date().toISOString().split('T')[0], (date) => {
-        window.showInputModal("Payment Method", "e.g. Cash, UPI, GPay", "Payment", (method) => {
-          currentInvoice.payments.push({ amount: amt, date: date || new Date().toISOString().split('T')[0], method: method || "Payment" });
-          
-          const totalPaid = currentInvoice.payments.reduce((s, p) => s + (Number(p.amount) || 0), 0);
-          if (totalPaid >= (currentInvoice.total || 0)) currentInvoice.status = "paid";
-          else if (totalPaid > 0) currentInvoice.status = "partially_paid";
-
-          save();
-          window.renderPaymentHistory();
-          renderEditorHub();
-        });
-      });
-    }, true);
+    document.getElementById("paAmount").value = "";
+    document.getElementById("paDate").value = new Date().toISOString().split('T')[0];
+    document.getElementById("paNote").value = "";
+    // Reset method tabs
+    document.querySelectorAll('.method-tab').forEach(t => t.classList.remove('active'));
+    document.querySelector('.method-tab[data-m="UPI"]').classList.add('active');
+    window.selectedMethod = "UPI";
+    pushScreen("paymentAddScreen");
   });
+};
+
+window.selectedMethod = "UPI";
+window.selectPaymentMethod = (m) => {
+    window.selectedMethod = m;
+    document.querySelectorAll('.method-tab').forEach(t => {
+        t.classList.toggle('active', t.getAttribute('data-m') === m);
+    });
+};
+
+window.savePaymentEntry = () => {
+    if (!currentInvoice) return;
+    const amt = parseFloat(document.getElementById("paAmount").value);
+    if (isNaN(amt) || amt <= 0) return alert("Please enter a valid amount");
+    
+    const date = document.getElementById("paDate").value || new Date().toISOString().split('T')[0];
+    const method = window.selectedMethod || "UPI";
+    const note = document.getElementById("paNote").value.trim();
+    
+    if (!currentInvoice.payments) currentInvoice.payments = [];
+    currentInvoice.payments.push({ amount: amt, date, method, note });
+    
+    // Auto-update status
+    const total = currentInvoice.total || 0;
+    const paid = currentInvoice.payments.reduce((s, p) => s + (Number(p.amount) || 0), 0);
+    if (paid >= total) currentInvoice.status = "paid";
+    else if (paid > 0) currentInvoice.status = "partially_paid";
+    
+    save();
+    alert("Payment Record Saved!");
+    popScreen();
+    window.renderPaymentHistory();
+    renderEditorHub();
 };
 
 window.deleteHistoryPayment = (idx) => {
@@ -4481,3 +4502,17 @@ window.shareCurrentPrescription = () => {
 
 // Initialize Sync on load
 SyncManager.init();
+// --- Additional Global Fixes ---
+window.addNewClient = () => {
+    window.editingClientId = null;
+    pushScreen("clientForm");
+};
+
+window.deleteItemFromLibrary = (id) => {
+    window.showConfirmModal("Delete Item", "Remove this item from your library?", () => {
+        state.items = state.items.filter(i => i.id !== id);
+        save();
+        alert("Item deleted");
+        if (window.renderItemPicker) window.renderItemPicker();
+    });
+};
