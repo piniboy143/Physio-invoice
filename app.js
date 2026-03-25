@@ -1,4 +1,27 @@
 console.log("App loading...");
+
+const NativeBridge = {
+    get platform() {
+        if (window.ReactNativeWebView) return 'expo';
+        if (window.location.protocol === 'capacitor:' || window.Capacitor) return 'capacitor';
+        return 'web';
+    },
+    postMessage(data) {
+        if (this.platform === 'expo') {
+            try { NativeBridge.postMessage(JSON.stringify(data)); } catch(e) { console.error(e); }
+        } else {
+            console.log("Bridge Call:", data);
+        }
+    },
+    share(data) {
+        if (this.platform === 'expo') {
+            this.postMessage({ type: 'share', ...data });
+        } else {
+            window.print();
+        }
+    }
+};
+
 window.onerror = function(msg, url, line, col, error) {
   console.group("GLOBAL ERROR");
   console.error(msg);
@@ -55,9 +78,7 @@ const SyncManager = {
   db: null,
   uid: localStorage.getItem("sync_uid") || null,
   enabled: localStorage.getItem("sync_enabled") === 'true',
-    get isNative() {
-    return !!window.ReactNativeWebView || !!window.Capacitor || window.location.protocol === 'capacitor:';
-  },
+    get isNative() { return NativeBridge.platform !== 'web'; },
 
   init() {
     if (typeof firebase === 'undefined') return console.warn("Firebase not loaded");
@@ -96,7 +117,7 @@ const SyncManager = {
     }
 
     if (this.isNative) {
-      window.ReactNativeWebView.postMessage(JSON.stringify({ type: 'GOOGLE_LOGIN' }));
+      NativeBridge.postMessage(JSON.stringify({ type: 'GOOGLE_LOGIN' }));
     } else {
       alert("Google Login is only available in the Mobile App (APK). Please use the mobile version for real-time sync.");
     }
@@ -943,7 +964,7 @@ window.saveToPhone = () => {
 
     // Native Bridge: Save to Phone Contacts
     if (window.ReactNativeWebView) {
-        window.ReactNativeWebView.postMessage(JSON.stringify({
+        NativeBridge.postMessage(JSON.stringify({
             type: 'SAVE_CONTACT',
             payload: { name, phone, email, clinic }
         }));
@@ -3129,7 +3150,7 @@ window.exportData = () => {
     
     // Native Bridge Support
     if (window.ReactNativeWebView) {
-      window.ReactNativeWebView.postMessage(JSON.stringify({
+      NativeBridge.postMessage(JSON.stringify({
         type: 'SHARE_BACKUP',
         payload: dataStr,
         filename: `Invoice_Studio_Backup_${new Date().toISOString().split('T')[0]}.json`
@@ -4467,7 +4488,7 @@ window.shareDocumentNative = () => {
 
     // Special case for full preview sharing
     if (window.ReactNativeWebView) {
-        window.ReactNativeWebView.postMessage(JSON.stringify({
+        NativeBridge.postMessage(JSON.stringify({
             type: 'share',
             html: element.innerHTML,
             filename: filename
@@ -4478,24 +4499,7 @@ window.shareDocumentNative = () => {
     }
 };
 
-window.shareCurrentPrescription = () => {
-    const element = document.getElementById("prescPreviewContainer");
-    if (!element) return;
-    
-    const ptId = currentPrescription?.patientId;
-    const ptName = state.patients.find(p => p.id === ptId)?.name || "Patient";
-    const filename = `Prescription_${ptName}.pdf`;
-
-    if (window.ReactNativeWebView) {
-        window.ReactNativeWebView.postMessage(JSON.stringify({
-            type: 'share',
-            html: element.innerHTML,
-            filename: filename
-        }));
-    } else {
-        window.printCurrentPrescription();
-    }
-};
+window.shareCurrentPrescription = () => { window.print(); };
 
 // Redundant exportToExcel removed (Better version exists at line 2849)
 
@@ -4517,4 +4521,16 @@ window.deleteItemFromLibrary = (id) => {
         alert("Item deleted");
         if (window.renderItemPicker) window.renderItemPicker();
     });
+};
+
+window.saveToContacts = (client) => {
+    const vcard = "BEGIN:VCARD\nVERSION:3.0\nFN:" + (client.name || "Client") + "\nTEL;TYPE=CELL:" + (client.phone || "") + "\nEND:VCARD";
+    const blob = new Blob([vcard], { type: "text/vcard" });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', (client.name || "Client") + ".vcf");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 };

@@ -2625,7 +2625,7 @@ input:checked + .slider:before { transform: translateX(20px); }
     </header>
 
     <main class="app-main">
-      <section class="screen" id="dashboardScreen">
+      <section class="screen" style="background: white; min-height: 100vh;" id="dashboardScreen">
         <div class="main-scroll">
           <div style="padding: 16px; display: flex; flex-direction: column; gap: 12px; background: white; border-bottom: 2px solid #f1f5f9; margin-bottom: 12px;">
             <div class="search-bar" style="position: relative; display: flex; align-items: center; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 0 12px;">
@@ -2661,7 +2661,7 @@ input:checked + .slider:before { transform: translateX(20px); }
         </button>
       </section>
 
-      <section class="screen" id="estimatesDashboardScreen">
+      <section class="screen" style="background: white; min-height: 100vh;" id="estimatesDashboardScreen">
         <div class="main-scroll">
           <div style="padding: 16px; display: flex; flex-direction: column; gap: 12px; background: white; border-bottom: 2px solid #f1f5f9; margin-bottom: 12px;">
             <div class="search-bar" style="position: relative; display: flex; align-items: center; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 0 12px;">
@@ -2676,7 +2676,7 @@ input:checked + .slider:before { transform: translateX(20px); }
         </button>
       </section>
 
-      <section class="screen" id="editorScreen">
+      <section class="screen" style="background: white; min-height: 100vh;" id="editorScreen">
         <div class="main-scroll">
           <div class="editor-sections">
           <div class="section-card professionally-styled" id="editInfoBtn">
@@ -2848,7 +2848,7 @@ input:checked + .slider:before { transform: translateX(20px); }
         </div>
       </section>
 
-      <section class="screen" id="previewScreen">
+      <section class="screen" style="background: white; min-height: 100vh;" id="previewScreen">
         <div id="pdfFrame" style="position: relative;" onclick="pushScreen('fullPreview')">
           <!-- Magnifying glass indicator -->
           <div id="zoomIndicator">
@@ -2885,7 +2885,7 @@ input:checked + .slider:before { transform: translateX(20px); }
         </div>
       </section>
 
-      <section class="screen" id="fullPreviewScreen">
+      <section class="screen" style="background: white; min-height: 100vh;" id="fullPreviewScreen">
         <div class="full-preview-container">
           <div id="fullPdfFrame" style="position: relative;"></div>
           
@@ -2902,7 +2902,7 @@ input:checked + .slider:before { transform: translateX(20px); }
         </div>
       </section>
 
-      <section class="screen" id="invoiceInfoScreen">
+      <section class="screen" style="background: white; min-height: 100vh;" id="invoiceInfoScreen">
         <div style="background: white; margin: 16px; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
           <div class="form-group">
             <label>Invoice Number <span class="required">*</span></label>
@@ -2940,13 +2940,13 @@ input:checked + .slider:before { transform: translateX(20px); }
         </div>
       </section>
 
-      <section class="screen" id="templatePickerScreen">
+      <section class="screen" style="background: white; min-height: 100vh;" id="templatePickerScreen">
         <div class="template-grid" id="templateGrid">
           <!-- Templates will be rendered here -->
         </div>
       </section>
 
-      <section class="screen" id="businessInfoScreen">
+      <section class="screen" style="background: white; min-height: 100vh;" id="businessInfoScreen">
         <div style="padding: 24px;">
           <div class="business-logo-uploader" style="position: relative;">
             <div onclick="document.getElementById('biLogoInput').click()" style="cursor: pointer;">
@@ -2966,7 +2966,7 @@ input:checked + .slider:before { transform: translateX(20px); }
         </div>
       </section>
 
-      <section class="screen" id="settingsScreen">
+      <section class="screen" style="background: white; min-height: 100vh;" id="settingsScreen">
         <div class="main-scroll">
           <div style="padding: 16px;">
             <!-- Business Section -->
@@ -3043,7 +3043,7 @@ input:checked + .slider:before { transform: translateX(20px); }
 
 
 
-      <section class="screen" id="prescriptionScreen">
+      <section class="screen" style="background: white; min-height: 100vh;" id="prescriptionScreen">
         <div class="main-header" style="background: white; border-bottom: 1px solid #e2e8f0; padding: 20px; text-align: center;">
           <div style="font-size: 0.8rem; color: #64748b; margin-bottom: 4px; font-weight: 600;">Active prescriptions</div>
           <div id="prescCountText" style="font-size: 2rem; font-weight: 800; color: #3b82f6;">0</div>
@@ -3061,7 +3061,7 @@ input:checked + .slider:before { transform: translateX(20px); }
         </div>
       </section>
 
-      <section class="screen" id="prescriptionEditorHubScreen">
+      <section class="screen" style="background: white; min-height: 100vh;" id="prescriptionEditorHubScreen">
         <div class="main-scroll" style="background: #f8fafc;">
           <div style="padding: 16px;">
             <div class="section-card professionally-styled" style="margin-bottom: 24px; border-left: 5px solid #3b82f6;">
@@ -3164,7 +3164,7 @@ input:checked + .slider:before { transform: translateX(20px); }
       </section>
 
 
-      <section class="screen" id="prescAdviceScreen">
+      <section class="screen" style="background: white; min-height: 100vh;" id="prescAdviceScreen">
         <div class="clinical-header">
           <div style="font-size: 0.8rem; color: #64748b; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Patient Education</div>
           <h2 style="font-weight: 800; color: #1e293b; margin: 0;">Advice & Instructions</h2>
@@ -3185,7 +3185,7 @@ input:checked + .slider:before { transform: translateX(20px); }
         </div>
       </section>
 
-      <section class="screen" id="prescPreviewScreen">
+      <section class="screen" style="background: white; min-height: 100vh;" id="prescPreviewScreen">
         <div class="main-scroll" style="background: #f1f5f9; display: flex; flex-direction: column;">
           <div id="prescPreviewViewport" style="flex: 1; width: 100%; overflow: auto; display: flex; flex-direction: column; align-items: center; padding: 20px 0;">
             <div id="prescPreviewScaler" style="transform-origin: top center; transition: transform 0.2s;">
@@ -3208,7 +3208,7 @@ input:checked + .slider:before { transform: translateX(20px); }
       </section>
 
 
-      <section class="screen" id="prescObjectiveScreen">
+      <section class="screen" style="background: white; min-height: 100vh;" id="prescObjectiveScreen">
         <div class="clinical-header">
           <div style="font-size: 0.8rem; color: #64748b; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Examination</div>
           <h2 style="font-weight: 800; color: #1e293b; margin: 0;">Objective (O)</h2>
@@ -3247,7 +3247,7 @@ input:checked + .slider:before { transform: translateX(20px); }
       </section>
 
 
-      <section class="screen" id="prescInfoScreen">
+      <section class="screen" style="background: white; min-height: 100vh;" id="prescInfoScreen">
         <div class="clinical-header">
           <div style="font-size: 0.8rem; color: #64748b; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Diagnosis</div>
           <h2 style="font-weight: 800; color: #1e293b; margin: 0;">Clinical Assessment (A)</h2>
@@ -3273,7 +3273,7 @@ input:checked + .slider:before { transform: translateX(20px); }
         </div>
       </section>
 
-      <section class="screen" id="prescExercisesScreen">
+      <section class="screen" style="background: white; min-height: 100vh;" id="prescExercisesScreen">
         <div class="clinical-header">
           <div style="font-size: 0.8rem; color: #64748b; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Therapeutic Plan</div>
           <h2 style="font-weight: 800; color: #1e293b; margin: 0;">Exercise Protocol (P)</h2>
@@ -3293,7 +3293,7 @@ input:checked + .slider:before { transform: translateX(20px); }
       </section>
 
       <!-- NEW CLINICAL SCREENS -->
-      <section class="screen" id="prescDoctorPickerScreen">
+      <section class="screen" style="background: white; min-height: 100vh;" id="prescDoctorPickerScreen">
         <div class="main-scroll" style="background: #f8fafc;">
           <div style="padding: 16px;">
             <div class="picker-card professionally-styled" id="btnNewDoctor" style="margin-bottom: 24px; display: flex; align-items: center; gap: 12px; cursor: pointer;">
@@ -3306,7 +3306,7 @@ input:checked + .slider:before { transform: translateX(20px); }
         </div>
       </section>
 
-      <section class="screen" id="prescDoctorFormScreen">
+      <section class="screen" style="background: white; min-height: 100vh;" id="prescDoctorFormScreen">
         <div class="main-scroll">
           <div style="padding: 16px;">
             <div class="form-card">
@@ -3341,7 +3341,7 @@ input:checked + .slider:before { transform: translateX(20px); }
       </section>
 
 
-      <section class="screen" id="prescAssessmentScreen">
+      <section class="screen" style="background: white; min-height: 100vh;" id="prescAssessmentScreen">
         <div class="clinical-header">
           <div style="font-size: 0.8rem; color: #64748b; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Patient History</div>
           <h2 style="font-weight: 800; color: #1e293b; margin: 0;">Subjective (S)</h2>
@@ -3385,7 +3385,7 @@ input:checked + .slider:before { transform: translateX(20px); }
         </div>
       </section>
 
-      <section class="screen" id="prescInternalNotesScreen">
+      <section class="screen" style="background: white; min-height: 100vh;" id="prescInternalNotesScreen">
         <div class="clinical-header">
           <div style="font-size: 0.8rem; color: #64748b; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Internal Use Only</div>
           <h2 style="font-weight: 800; color: #1e293b; margin: 0;">Administrative</h2>
@@ -3429,7 +3429,7 @@ input:checked + .slider:before { transform: translateX(20px); }
         </div>
       </section>
 
-      <section class="screen" id="clientScreen">
+      <section class="screen" style="background: white; min-height: 100vh;" id="clientScreen">
         <div style="padding: 16px;">
           <div class="new-client-card" onclick="window.addNewClient()">
             <div class="content">
@@ -3450,7 +3450,7 @@ input:checked + .slider:before { transform: translateX(20px); }
         </div>
       </section>
 
-      <section class="screen" id="clientFormScreen">
+      <section class="screen" style="background: white; min-height: 100vh;" id="clientFormScreen">
         <div class="main-scroll">
           <div style="padding: 16px;">
             <div class="form-card">
@@ -3521,7 +3521,7 @@ input:checked + .slider:before { transform: translateX(20px); }
         </div>
       </section>
 
-      <section class="screen" id="itemFormScreen">
+      <section class="screen" style="background: white; min-height: 100vh;" id="itemFormScreen">
         <div class="main-scroll">
           <div style="padding: 16px;">
             <div class="form-card">
@@ -3575,7 +3575,7 @@ input:checked + .slider:before { transform: translateX(20px); }
         </div>
       </section>
 
-      <section class="screen" id="discountScreen">
+      <section class="screen" style="background: white; min-height: 100vh;" id="discountScreen">
         <div class="main-scroll">
           <div style="padding: 16px;">
             <div class="form-card">
@@ -3605,7 +3605,7 @@ input:checked + .slider:before { transform: translateX(20px); }
         </div>
       </section>
 
-      <section class="screen" id="signaturePickerScreen">
+      <section class="screen" style="background: white; min-height: 100vh;" id="signaturePickerScreen">
         <div class="main-scroll" style="background: #f8fafc;">
           <div style="padding: 16px;">
             <div class="section-card professionally-styled" id="btnNewSignature" style="margin-bottom: 24px; display: flex; align-items: center; gap: 12px; cursor: pointer;">
@@ -3620,7 +3620,7 @@ input:checked + .slider:before { transform: translateX(20px); }
         <input type="file" id="sigUploadInput" accept="image/*" style="display:none">
       </section>
 
-      <section class="screen" id="termsPickerScreen">
+      <section class="screen" style="background: white; min-height: 100vh;" id="termsPickerScreen">
         <div class="main-scroll" style="background: #f8fafc;">
           <div style="padding: 16px;">
             <div class="picker-card" id="btnNewTerms" style="display: flex; align-items: center; justify-content: flex-start; gap: 12px; cursor: pointer; background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
@@ -3636,7 +3636,7 @@ input:checked + .slider:before { transform: translateX(20px); }
         </div>
       </section>
 
-      <section class="screen" id="dueTermsPickerScreen">
+      <section class="screen" style="background: white; min-height: 100vh;" id="dueTermsPickerScreen">
         <div class="main-scroll" style="background: #f8fafc;">
           <div style="padding: 16px;">
             <div class="picker-card" id="btnNewDueTerms" style="display: flex; align-items: center; justify-content: flex-start; gap: 12px; cursor: pointer; background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
@@ -3652,7 +3652,7 @@ input:checked + .slider:before { transform: translateX(20px); }
         </div>
       </section>
 
-      <section class="screen" id="businessPickerScreen">
+      <section class="screen" style="background: white; min-height: 100vh;" id="businessPickerScreen">
         <div class="main-scroll" style="background: #f8fafc;">
           <div style="padding: 16px;">
             <div class="picker-card" id="btnNewBusiness" style="display: flex; align-items: center; justify-content: flex-start; gap: 12px; cursor: pointer; background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
@@ -3668,7 +3668,7 @@ input:checked + .slider:before { transform: translateX(20px); }
         </div>
       </section>
 
-      <section class="screen" id="paymentPickerScreen">
+      <section class="screen" style="background: white; min-height: 100vh;" id="paymentPickerScreen">
         <div class="main-scroll">
           <div style="padding: 16px;">
             <div class="action-card" id="btnNewPaymentMethod">
@@ -3683,7 +3683,7 @@ input:checked + .slider:before { transform: translateX(20px); }
         </div>
       </section>
 
-      <section class="screen" id="sessionsScreen">
+      <section class="screen" style="background: white; min-height: 100vh;" id="sessionsScreen">
         <div class="flex-title" style="padding: 16px 20px; border-bottom: 1px solid #e2e8f0; background: white;">
           <h2 style="font-size: 1.1rem; font-weight: 700;">Sessions Tracking</h2>
         </div>
@@ -3748,7 +3748,7 @@ input:checked + .slider:before { transform: translateX(20px); }
         </div>
       </section>
 
-      <section class="screen" id="taxPickerScreen">
+      <section class="screen" style="background: white; min-height: 100vh;" id="taxPickerScreen">
         <div class="main-scroll" style="background: #f8fafc;">
           <div style="padding: 16px;">
             <div class="picker-card" id="btnNewTax" style="display: flex; align-items: center; justify-content: flex-start; gap: 12px; cursor: pointer; background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
@@ -3765,7 +3765,7 @@ input:checked + .slider:before { transform: translateX(20px); }
       </section>
 
 
-      <section class="screen" id="paymentHistoryScreen">
+      <section class="screen" style="background: white; min-height: 100vh;" id="paymentHistoryScreen">
         <div class="main-header" style="background: white; border-bottom: 1px solid #e2e8f0; padding: 20px; text-align: center;">
           <div style="font-size: 0.8rem; color: #64748b; margin-bottom: 4px; font-weight: 600;">Balance Due</div>
           <div id="phTotalDue" style="font-size: 2rem; font-weight: 800; color: #ef4444;">₹0.00</div>
@@ -3783,7 +3783,7 @@ input:checked + .slider:before { transform: translateX(20px); }
         </div>
       </section>
 
-      <section class="screen" id="paymentAddScreen">
+      <section class="screen" style="background: white; min-height: 100vh;" id="paymentAddScreen">
         <div class="main-scroll" style="background: white;">
           <div style="padding: 24px;">
             <div class="section-label-simple">Payment Amount</div>
@@ -3814,7 +3814,7 @@ input:checked + .slider:before { transform: translateX(20px); }
       </section>
 
       <!-- Signature Picker Screen -->
-      <section class="screen" id="signaturePicker">
+      <section class="screen" style="background: white; min-height: 100vh;" id="signaturePicker">
         <div class="main-scroll">
           <div style="padding: 16px;">
             <button id="btnNewSignature" class="btn btn-primary" style="width: 100%; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 16px; border-radius: 14px; font-size: 1rem; font-weight: 700;">
@@ -3826,7 +3826,7 @@ input:checked + .slider:before { transform: translateX(20px); }
         </div>
       </section>
 
-      <section class="screen" id="itemPickerScreen">
+      <section class="screen" style="background: white; min-height: 100vh;" id="itemPickerScreen">
         <div class="main-scroll">
           <div style="padding: 16px;">
             <div id="itemPickerList" class="list-container"></div>
@@ -3840,7 +3840,7 @@ input:checked + .slider:before { transform: translateX(20px); }
         </div>
       </section>
 
-      <section class="screen" id="itemScreen">
+      <section class="screen" style="background: white; min-height: 100vh;" id="itemScreen">
         <div style="padding: 16px;">
           <div class="list-container" id="itemsList"></div>
         </div>
@@ -3849,7 +3849,7 @@ input:checked + .slider:before { transform: translateX(20px); }
         </button>
       </section>
       <!-- REPORT SCREENS -->
-      <section class="screen" id="reportDashboardScreen">
+      <section class="screen" style="background: white; min-height: 100vh;" id="reportDashboardScreen">
         <div id="reportLoadingIndicator" style="position: absolute; inset: 0; background: white; z-index: 100; display: flex; align-items: center; justify-content: center; font-weight: 600; color: #3b82f6;">
            <div style="text-align: center;">
              <div class="circle-plus" style="animation: spin 1s linear infinite; margin-bottom: 12px; display: inline-block;">+</div>
@@ -3930,7 +3930,7 @@ input:checked + .slider:before { transform: translateX(20px); }
       </section>
 
       <!-- REPORT: SALES BY CLIENT FULL -->
-      <section class="screen" id="reportClientScreen">
+      <section class="screen" style="background: white; min-height: 100vh;" id="reportClientScreen">
         <div class="main-scroll" style="background: #f8fafc;">
           <div style="padding: 16px; display: flex; gap: 12px; background: white; border-bottom: 1px solid #e2e8f0;">
              <!-- Keep same filters visually synced -->
@@ -3956,7 +3956,7 @@ input:checked + .slider:before { transform: translateX(20px); }
       </section>
 
       <!-- REPORT: SALES BY ITEM FULL -->
-      <section class="screen" id="reportItemScreen">
+      <section class="screen" style="background: white; min-height: 100vh;" id="reportItemScreen">
         <div class="main-scroll" style="background: #f8fafc;">
           <div style="padding: 16px; display: flex; gap: 12px; background: white; border-bottom: 1px solid #e2e8f0;">
              <!-- Keep same filters visually synced -->
@@ -3992,7 +3992,7 @@ input:checked + .slider:before { transform: translateX(20px); }
       </section>
       
       <!-- EXPORT & IMPORT SCREEN -->
-      <section class="screen" id="exportImportScreen">
+      <section class="screen" style="background: white; min-height: 100vh;" id="exportImportScreen">
         <div class="main-scroll" style="background: #f8fafc;">
           <div style="padding: 24px;">
             <div style="margin-bottom: 24px;">
@@ -4688,6 +4688,29 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
 
 <script>
 console.log("App loading...");
+
+const NativeBridge = {
+    get platform() {
+        if (window.ReactNativeWebView) return 'expo';
+        if (window.location.protocol === 'capacitor:' || window.Capacitor) return 'capacitor';
+        return 'web';
+    },
+    postMessage(data) {
+        if (this.platform === 'expo') {
+            try { NativeBridge.postMessage(JSON.stringify(data)); } catch(e) { console.error(e); }
+        } else {
+            console.log("Bridge Call:", data);
+        }
+    },
+    share(data) {
+        if (this.platform === 'expo') {
+            this.postMessage({ type: 'share', ...data });
+        } else {
+            window.print();
+        }
+    }
+};
+
 window.onerror = function(msg, url, line, col, error) {
   console.group("GLOBAL ERROR");
   console.error(msg);
@@ -4744,9 +4767,7 @@ const SyncManager = {
   db: null,
   uid: localStorage.getItem("sync_uid") || null,
   enabled: localStorage.getItem("sync_enabled") === 'true',
-    get isNative() {
-    return !!window.ReactNativeWebView || !!window.Capacitor || window.location.protocol === 'capacitor:';
-  },
+    get isNative() { return NativeBridge.platform !== 'web'; },
 
   init() {
     if (typeof firebase === 'undefined') return console.warn("Firebase not loaded");
@@ -4785,7 +4806,7 @@ const SyncManager = {
     }
 
     if (this.isNative) {
-      window.ReactNativeWebView.postMessage(JSON.stringify({ type: 'GOOGLE_LOGIN' }));
+      NativeBridge.postMessage(JSON.stringify({ type: 'GOOGLE_LOGIN' }));
     } else {
       alert("Google Login is only available in the Mobile App (APK). Please use the mobile version for real-time sync.");
     }
@@ -5632,7 +5653,7 @@ window.saveToPhone = () => {
 
     // Native Bridge: Save to Phone Contacts
     if (window.ReactNativeWebView) {
-        window.ReactNativeWebView.postMessage(JSON.stringify({
+        NativeBridge.postMessage(JSON.stringify({
             type: 'SAVE_CONTACT',
             payload: { name, phone, email, clinic }
         }));
@@ -7818,7 +7839,7 @@ window.exportData = () => {
     
     // Native Bridge Support
     if (window.ReactNativeWebView) {
-      window.ReactNativeWebView.postMessage(JSON.stringify({
+      NativeBridge.postMessage(JSON.stringify({
         type: 'SHARE_BACKUP',
         payload: dataStr,
         filename: `Invoice_Studio_Backup_${new Date().toISOString().split('T')[0]}.json`
@@ -9156,7 +9177,7 @@ window.shareDocumentNative = () => {
 
     // Special case for full preview sharing
     if (window.ReactNativeWebView) {
-        window.ReactNativeWebView.postMessage(JSON.stringify({
+        NativeBridge.postMessage(JSON.stringify({
             type: 'share',
             html: element.innerHTML,
             filename: filename
@@ -9167,24 +9188,7 @@ window.shareDocumentNative = () => {
     }
 };
 
-window.shareCurrentPrescription = () => {
-    const element = document.getElementById("prescPreviewContainer");
-    if (!element) return;
-    
-    const ptId = currentPrescription?.patientId;
-    const ptName = state.patients.find(p => p.id === ptId)?.name || "Patient";
-    const filename = `Prescription_${ptName}.pdf`;
-
-    if (window.ReactNativeWebView) {
-        window.ReactNativeWebView.postMessage(JSON.stringify({
-            type: 'share',
-            html: element.innerHTML,
-            filename: filename
-        }));
-    } else {
-        window.printCurrentPrescription();
-    }
-};
+window.shareCurrentPrescription = () => { window.print(); };
 
 // Redundant exportToExcel removed (Better version exists at line 2849)
 
@@ -9206,6 +9210,18 @@ window.deleteItemFromLibrary = (id) => {
         alert("Item deleted");
         if (window.renderItemPicker) window.renderItemPicker();
     });
+};
+
+window.saveToContacts = (client) => {
+    const vcard = "BEGIN:VCARD\nVERSION:3.0\nFN:" + (client.name || "Client") + "\nTEL;TYPE=CELL:" + (client.phone || "") + "\nEND:VCARD";
+    const blob = new Blob([vcard], { type: "text/vcard" });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', (client.name || "Client") + ".vcf");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 };
 
 </script>
